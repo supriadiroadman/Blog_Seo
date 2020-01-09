@@ -17,8 +17,10 @@ Route::get('/', function () {
 
 Route::get('/home', function () {
     return view('home');
-});
+})->name('home');
 
 Route::resource('/categories', 'CategoryController');
 
 Route::resource('/tags', 'TagController');
+
+Route::resource('/posts', 'PostController');

@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="{{ asset('/assets/modules/fontawesome/css/all.min.css') }}">
 
     <!-- CSS Libraries -->
+    <!-- push target to head -->
+    @stack('styles')
 
     <!-- Template CSS -->
     <link rel="stylesheet" href="{{ asset('/assets/css/style.css') }}">
@@ -71,6 +73,9 @@
     <script src="{{ asset('/assets/modules/nicescroll/jquery.nicescroll.min.js') }}"></script>
     <script src="{{ asset('/assets/modules/moment.min.js') }}"></script>
     <script src="{{ asset('/assets/js/stisla.js') }}"></script>
+
+    <!-- or push target to footer -->
+    @stack('scripts')
 
     <!-- JS Libraies -->
 
