@@ -160,10 +160,19 @@ class PostController extends Controller
         return redirect()->route('posts.index')->with('pesan', "$post->judul berhasil direstore");
     }
 
-    public function forcedelete($id)
+    public function forcedelete(Request $request, $id)
     {
        $post= Post::withTrashed()->whereId($id)->first();
        $post->forceDelete();
+
+       // Hapus gambar lama dari storage
+       $image_path = "storage/uploads/post/" . $post->gambar;
+       if (file_exists($image_path)) {
+           @unlink($image_path);
+       }
+       
+       $post->tags()->detach($request->tags);
+
        return redirect()->route('posts.trash')->with('pesan', "$post->judul berhasil dihapus");
 
     }

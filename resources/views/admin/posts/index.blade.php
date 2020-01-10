@@ -37,7 +37,7 @@
                 <tr>
                     <th scope="row">{{ $posts->firstItem() + $key}}</th>
                     <td>{{ $post->judul }}</td>
-                    <td>{{ $post->category->name }}</td>
+                    <td>{{ $post->category->name??'' }}</td>
                     <td>{{ $post->konten }}</td>
 
                     <td>

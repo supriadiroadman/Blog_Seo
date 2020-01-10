@@ -33,12 +33,22 @@
                         <label>Kategori</label>
                         <select class="form-control" name="category_id">
                             <option disabled>Pilih Kategori</option>
-                            @forelse ($categories as $category)
+
+                            {{-- Jika parent tidak ada (relasi ke kategori dihapus) --}}
+                            @if (empty($post->category->id))
+                            @foreach ($categories as $category)
+                            <option value="{{$category->id}}" >
+                                {{ $category->name }}</option>
+                            @endforeach
+                                
+                            {{-- Jika parent ada (berelasi ke kategori) --}}
+                            @else
+                             @foreach ($categories as $category)
                             <option value="{{$category->id}}" {{ $category->id==$post->category->id ? 'selected': '' }}>
                                 {{ $category->name }}</option>
-                            @empty
-                            <option>Tidak ada data</option>
-                            @endforelse
+                            @endforeach
+                                
+                            @endif
                         </select>
                     </div>
 
