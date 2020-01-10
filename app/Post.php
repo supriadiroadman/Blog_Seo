@@ -3,10 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use phpDocumentor\Reflection\Types\This;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Post extends Model
 {
+    // SoftDeletes
+    use SoftDeletes;
 
     protected $fillable = ['judul', 'category_id', 'konten', 'gambar', 'slug'];
 

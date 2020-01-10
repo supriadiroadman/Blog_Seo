@@ -1,5 +1,5 @@
 @extends('backend.master')
-@section('title', 'Post')
+@section('title', 'Post Trash')
 
 @section('content')
 <div class="card">
@@ -18,7 +18,7 @@
 
         <div class="section-title mt-0">
             Post
-            <a href="{{ route('posts.create') }}" class="btn btn-primary float-right mb-3">Tambah</a>
+            
         </div>
         <table class="table table-hover">
             <thead>
@@ -52,13 +52,13 @@
                             style="width: 100px">
                     </td>
                     <td class="d-flex align-items-center">
-                        <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-primary btn-sm mr-2">Edit</a>
+                        <a href="{{ route('posts.restore', $post->id) }}" class="btn btn-info btn-sm mr-2">Restore</a>
 
-                        <form action="{{ route('posts.destroy', $post->id) }}" method="POST">
+                        <form action="{{ route('posts.forcedelete', $post->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-warning btn-sm"
-                                onclick="return confirm('Yakin akan dihapus?');">Trash</button>
+                            <button type="submit" class="btn btn-danger btn-sm"
+                                onclick="return confirm('Yakin akan dihapus?');">Hapus</button>
                         </form>
                     </td>
                 </tr>

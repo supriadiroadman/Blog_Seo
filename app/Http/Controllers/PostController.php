@@ -141,6 +141,30 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        // Hapus dengan softDeletes
+        $post->delete();
+        return redirect()->route('posts.trash')->with('pesan', "$post->judul berhasil ditrash");
+    }
+
+    public function trash()
+    {
+        $posts = Post::onlyTrashed()->paginate(5);
+        return view('admin.posts.trashed', compact('posts'));
+    }
+
+    public function restore($id)
+    {  
+        // Post::withTrashed()->whereId($id)->restore();
+        $post= Post::withTrashed()->whereId($id)->first();
+        $post->restore();
+        return redirect()->route('posts.index')->with('pesan', "$post->judul berhasil direstore");
+    }
+
+    public function forcedelete($id)
+    {
+       $post= Post::withTrashed()->whereId($id)->first();
+       $post->forceDelete();
+       return redirect()->route('posts.trash')->with('pesan', "$post->judul berhasil dihapus");
+
     }
 }

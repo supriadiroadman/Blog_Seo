@@ -16,6 +16,7 @@
                     <span>Post</span></a>
                 <ul class="dropdown-menu">
                     <li><a class="nav-link" href="{{ route('posts.index') }}">List Post</a></li>
+                    <li><a class="nav-link" href="{{ route('posts.trash') }}">Trash Post</a></li>
                 </ul>
             </li>
             <li class="dropdown">
