@@ -33,6 +33,13 @@
                     <li><a class="nav-link" href="{{ route('tags.index') }}">List Tags</a></li>
                 </ul>
             </li>
+            <li class="dropdown">
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-user"></i>
+                    <span>Users</span></a>
+                <ul class="dropdown-menu">
+                    <li><a class="nav-link" href="{{ route('users.index') }}">List Users</a></li>
+                </ul>
+            </li>
         </ul>
     </aside>
 </div>
