@@ -10,20 +10,19 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Auth::routes();
+Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/home', function () {
-    return view('home');
-})->name('home');
+Route::middleware(['auth'])->group(function () {
+    Route::resource('/categories', 'CategoryController');
+    Route::resource('/tags', 'TagController');
 
-Route::resource('/categories', 'CategoryController');
-
-Route::resource('/tags', 'TagController');
-
-Route::get('/posts/trash', 'PostController@trash')->name('posts.trash');;
-Route::get('/posts/restore/{id}', 'PostController@restore')->name('posts.restore');
-Route::delete('/posts/forcedelete/{id}', 'PostController@forcedelete')->name('posts.forcedelete');
-Route::resource('/posts', 'PostController');
+    Route::get('/posts/trash', 'PostController@trash')->name('posts.trash');
+    Route::get('/posts/restore/{id}', 'PostController@restore')->name('posts.restore');
+    Route::delete('/posts/forcedelete/{id}', 'PostController@forcedelete')->name('posts.forcedelete');
+    Route::resource('/posts', 'PostController');
+});
