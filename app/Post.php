@@ -10,7 +10,7 @@ class Post extends Model
     // SoftDeletes
     use SoftDeletes;
 
-    protected $fillable = ['judul', 'category_id', 'konten', 'gambar', 'slug'];
+    protected $fillable = ['judul', 'category_id', 'konten', 'gambar', 'slug', 'user_id'];
 
     // One To Many
     public function category()
@@ -22,5 +22,11 @@ class Post extends Model
     public function tags()
     {
         return $this->belongsToMany('App\Tag');
+    }
+
+    // One To Many
+    public function user()
+    {
+        return $this->belongsTo('App\User');
     }
 }

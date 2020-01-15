@@ -8,6 +8,7 @@ use App\Tag;
 use Facade\FlareClient\View;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -54,6 +55,7 @@ class PostController extends Controller
         $new_gambar = time() . "-" . $gambar->getClientOriginalName();
         $validateData['gambar'] = $new_gambar;
         $validateData['slug'] = Str::slug($request->judul);
+        $validateData['user_id'] = Auth::id();
 
         $gambar->storeAs('public/uploads/post', $new_gambar);
 
@@ -153,27 +155,26 @@ class PostController extends Controller
     }
 
     public function restore($id)
-    {  
+    {
         // Post::withTrashed()->whereId($id)->restore();
-        $post= Post::withTrashed()->whereId($id)->first();
+        $post = Post::withTrashed()->whereId($id)->first();
         $post->restore();
         return redirect()->route('posts.index')->with('pesan', "$post->judul berhasil direstore");
     }
 
     public function forcedelete(Request $request, $id)
     {
-       $post= Post::withTrashed()->whereId($id)->first();
-       $post->forceDelete();
+        $post = Post::withTrashed()->whereId($id)->first();
+        $post->forceDelete();
 
-       // Hapus gambar lama dari storage
-       $image_path = "storage/uploads/post/" . $post->gambar;
-       if (file_exists($image_path)) {
-           @unlink($image_path);
-       }
-       
-       $post->tags()->detach($request->tags);
+        // Hapus gambar lama dari storage
+        $image_path = "storage/uploads/post/" . $post->gambar;
+        if (file_exists($image_path)) {
+            @unlink($image_path);
+        }
 
-       return redirect()->route('posts.trash')->with('pesan', "$post->judul berhasil dihapus");
+        $post->tags()->detach($request->tags);
 
+        return redirect()->route('posts.trash')->with('pesan', "$post->judul berhasil dihapus");
     }
 }

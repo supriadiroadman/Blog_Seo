@@ -28,6 +28,7 @@
                     <th scope="col">Kategori</th>
                     <th scope="col">Konten</th>
                     <th scope="col">Tag</th>
+                    <th scope="col">Creator</th>
                     <th scope="col">Gambar</th>
                     <th scope="col">Aksi</th>
                 </tr>
@@ -47,6 +48,8 @@
                         </div>
                         @endforeach
                     </td>
+
+                    <td>{{ $post->user->name }}</td>
 
                     <td><img src="{{ asset('storage/uploads/post/'.$post->gambar) }}" class="img-thumbnail"
                             style="width: 100px">
