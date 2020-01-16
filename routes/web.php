@@ -13,9 +13,8 @@
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'FrontController@index');
+Route::get('/articles/{slug}', 'FrontController@articles')->name('articles');
 
 Route::middleware(['auth'])->group(function () {
     Route::resource('/categories', 'CategoryController');
